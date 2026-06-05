@@ -113,6 +113,7 @@ else {
 	<?php
 		echo $lat=(isset($_GET['lat']))?$_GET['lat']:'';
 		echo $long=(isset($_GET['long']))?$_GET['long']:'';
+		$note1 = "";
 	?>
 	
 	
