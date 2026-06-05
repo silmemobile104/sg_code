@@ -1,2 +1,3 @@
 *.sql
+!silminmo_sg_cleaned.sql
 /tools/
