@@ -184,7 +184,7 @@ include("database.php");
 							setcookie("User", $_SESSION["User"], time()+12800);
 							setcookie("Fullname", $_SESSION["Fullname"], time()+12800); 
 
-							echo("<script>window.location = 'staff/index.php';</script>"); 
+							echo("<script>window.location = 'admin/staff/index.php';</script>"); 
 
 						//echo $onoff . " <br> " ;
 						//echo $login_on . " <br> " ;
@@ -243,7 +243,7 @@ include("database.php");
 						setcookie("User", $_SESSION["User"], time()+12800);
 						setcookie("Fullname", $_SESSION["Fullname"], time()+12800); 
 						 
-						echo("<script>window.location = 'staff/index.php';</script>"); 
+						echo("<script>window.location = 'admin/staff/index.php';</script>"); 
 						
 						
 					}else{
@@ -270,7 +270,7 @@ include("database.php");
 						$query2 = mysqli_query($objCon,$strSQL);
  
 						 
-						echo("<script>window.location = 'staff_wait/index.php?member=". $objResult["pk"]."&bill_no=".$bill_no."';</script>"); 
+						echo("<script>window.location = 'admin/staff_wait/index.php?member=". $objResult["pk"]."&bill_no=".$bill_no."';</script>"); 
 						
 					}
 					}else{ 
