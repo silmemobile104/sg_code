@@ -12,5 +12,8 @@ COPY . /var/www/html/
 # กำหนดสิทธิ์ให้ Apache สามารถอ่านไฟล์ได้
 RUN chown -R www-data:www-data /var/www/html/
 
+# เปิดใช้งาน Output Buffering เพื่อแก้ปัญหา Cannot start session when headers already sent
+RUN echo "output_buffering = 4096" > /usr/local/etc/php/conf.d/output-buffering.ini
+
 # เปิดพอร์ต 80
 EXPOSE 80
