@@ -67,15 +67,15 @@ else {
  		if(!empty($_SESSION["UserID"])){ 
 			if(($_SESSION["Status"] == "ST")){ 
 						
-				/// echo("<script>window.location = 'staff/index.php';</script>");  
+				echo("<script>window.location = 'staff/index.php';</script>");  
 			}
 			if(($_SESSION["Status"] == "A")){ 
 						
-				/// echo("<script>window.location = 'admin/index.php';</script>");  
+				echo("<script>window.location = 'admin/index.php';</script>");  
 			}
 			if(($_SESSION["Status"] == "P")){ 
 						
-				/// echo("<script>window.location = 'staffpartner/index.php';</script>");  
+				echo("<script>window.location = 'staffpartner/index.php';</script>");  
 			}
 		}
 		
