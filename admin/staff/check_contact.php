@@ -2,7 +2,7 @@
 session_start();
 $_SESSION["load"] = "1";
 include('header.php');
-ini_set("memory_limit","10M");
+ini_set("memory_limit","512M");
  
 	 $codepro = "";
 	 $name = "";

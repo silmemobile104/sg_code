@@ -2,7 +2,7 @@
 session_start();
 $_SESSION["load"] = "";
 include('header.php');
-ini_set("memory_limit","10M");
+ini_set("memory_limit","512M");
  
 $searchname = date('d/m')."/".(date('Y'));
 	if(empty($_GET["searchname"])){

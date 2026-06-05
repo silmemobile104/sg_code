@@ -62,7 +62,7 @@ include("../database.php");
 	}
 
 	 
-ini_set("memory_limit","10M");
+ini_set("memory_limit","512M");
 ?>
 <?php
 				function DateThai($strDate)
