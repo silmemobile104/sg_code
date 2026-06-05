@@ -1,0 +1,874 @@
+<?php 
+session_start();
+$_SESSION["load"] = "1";
+include('header.php'); 
+ 
+	$name = "";
+	$address = "";
+	$telphone = "";
+	$major = "";
+	$username = "";
+	$password = "";
+	$line = "";
+	$facebook = "";
+	$data = "";
+	$customer = "";
+	$searchname = "";
+	$producttype = "";
+	$cod = "";
+	$computer = "";
+	$moneymonth = "";
+	$moneycontact = "";
+	$percent = "";
+	$computer = "";
+	$computer2 = "";
+	$appleid = "";
+	$bank2 = "";
+	$dataicloud = "";
+
+
+	$status = "";
+	if(empty($_GET["type"])){
+		$searchname = date('d/m')."/".(date('Y'));
+		if(empty($_GET["searchname"])){
+
+			$cut = explode("/",$searchname);
+			$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+			$daystart_load = date("d-m-Y", strtotime($date_income)); 
+		}else{
+			$searchname = $_GET["searchname"];
+
+
+
+			$cut = explode("/",$searchname);
+			$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+
+			$daystart_load = date("d-m-Y", strtotime($date_income)); 
+		}
+
+
+		$searchname2 = date('d/m')."/".(date('Y'));
+		if(empty($_GET["searchname2"])){
+
+			$cut = explode("/",$searchname2);
+			$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+			$daystart_load2 = date("d-m-Y", strtotime($date_income)); 
+		}else{
+			$searchname2 = $_GET["searchname2"];
+
+
+
+			$cut = explode("/",$searchname2);
+			$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+
+			$daystart_load2 = date("d-m-Y", strtotime($date_income)); 
+		}
+	}else{ 
+		$searchname2 = date('m');
+		if(empty($_GET["searchname2"])){
+
+		}else{
+			$searchname2 = $_GET["searchname2"];
+		}
+
+		$searchname = date('Y');
+		if(empty($_GET["searchname"])){
+
+		}else{
+			$searchname = $_GET["searchname"];
+		}
+	}
+	
+	
+	$searchname3 = "";
+	if(empty($_GET["searchname3"])){
+		
+	}else{
+		$searchname3 = $_GET["searchname3"];
+	}
+	$searchname4 = "";
+	if(empty($_GET["searchname4"])){
+		
+	}else{
+		$searchname4 = $_GET["searchname4"];
+	}
+
+	$adminstatus = "";
+	if(empty($_GET["adminstatus"])){
+		
+	}else{
+		$adminstatus = $_GET["adminstatus"];
+	}
+
+?> 
+			<link href="../select2.min.css" rel="stylesheet" />
+			<script src="../select2.min.js"></script>  
+  			 
+			<link href='calenthai/css/jquery-ui-1.8.10.custom.css' rel='stylesheet' type='text/css'/>
+
+			<script type="text/javascript" src="calenthai/js/jquery-1.8.3.min.js"></script>
+			<script type="text/javascript" src="calenthai/js/jquery.datepick.js"></script>
+
+			<script type="text/javascript"> 
+			$(document).ready(function() {
+				var d = new Date();
+				d.setDate(d.getDate());
+				var toDay = d.getDate() + '/' + (d.getMonth() + 1) + '/' + (d.getFullYear()); 
+
+				$(".current").datepicker({    
+				changeMonth: true, 
+				changeYear: true, 
+				dateFormat: 'dd/mm/yy', 
+				isBuddhist: false, 
+				defaultDate: toDay, 
+				dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+				yearRange: "-5:+5",
+					  dayNamesMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
+					  monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+					  monthNamesShort: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
+					});
+			}); 
+			</script>
+        
+       <!-- page content -->
+        	<div class="right_col" role="main" style="background-color: #F5F5F7; " >
+           
+             
+             <div class=" col-lg-12 " style="  " align="left" >
+             <font color="#FFFFFF" size="3px" class="serif2"  >
+             <div style="margin-top: 1px;" > 
+                     <font size="4px" color="#000000">  ตรวจสอบคำขอสินเชื่อ   </font>  
+                     <br> 
+                     <font size="2px" color="#000000">  หน้าเเรก > ตรวจสอบคำขอสินเชื่อ   </font>   
+                     <div > &nbsp; </div>
+             </div> 
+             </font> 
+             </div>
+             
+            <div class="row"  >
+              <div class=" col-lg-12 "  style="margin-top: -15px;"  > 
+                <div class="x_panel"  style="background-color: #FFFFFF;  border-radius: 10px; " > 
+                 
+                  <div class=" col-lg-12 " style="background-color: #FFF; height: 38px; " align="left" >
+                  <font color="#FFFFFF" size="3px" class="serif2"  >
+                  <div style="margin-top: 6px;" > 
+                     <font size="4px" color="#000000">  ตรวจสอบคำขอสินเชื่อ   </font>   
+                  </div> 
+                  </font> 
+                  </div>
+                 
+                      <?php if(empty($_GET["page"])){ ?>
+                       
+							<form action="checkcontactpartner.php" method="get" >
+					 
+                       
+                    	     <div   class="col-lg-12"  align="left"  > 
+							  <table width="100%">
+									<tr> 
+										<td width="15%"> 
+										<font color="black" size="3px" class="serif">  ค้นหารายชื่อ/รหัสลูกค้า   </font>
+ 
+										<input type="hidden" id="page" name="page" value="<?php echo $_GET["page"]; ?>">
+										
+										<div class="input-group   "  style="border: 1px solid #C9C9C9; border-radius: 4px; height: 40px; ">
+										<input class="form-control    "   type="search" style="background-color: #FFF;  border: 1px solid #C9C9C9;  border: 0px; border-radius: 5px;   "    id="searchname3" name="searchname3" value="<?php echo $searchname3; ?>"       autocomplete="off"  >
+										  
+										<span class="input-group-append">
+										  <button class="btn btn-outline-secondary  " style="border: 0px solid; background-color: #FFF;" type="submit">
+												<img src="images/search.png" style="width: 15px; "> 
+										  </button>
+										</span>
+										</div> 
+										 
+										</td>  
+										<td width="1%">&nbsp;
+										
+										</td> 
+										<td width="15%"> 
+										<font color="black" size="3px" class="serif">  ร้านค้า   </font>
+ 
+										<div class="input-group   "  style="border: 1px solid #C9C9C9; border-radius: 4px; height: 40px; "> 
+										  <select class="form-control myselect" id="searchname4" name="searchname4"   style="background-color: #FFF;  border: 1px solid #FFF;  border: 0px; border-radius: 5px; width: 100%;   "   onchange='this.form.submit()'   >  
+										  <?php if(empty($searchname4)){ ?>
+										  	<option value="">  ร้านค้า    </option> 
+										  <?php } ?>
+											 
+											<?php 
+											$sql = "SELECT * FROM store where pk = '".$searchname4."' order by pk asc  "; 
+											$query = mysqli_query($objCon,$sql);
+											while($objResult = mysqli_fetch_array($query))
+											{ 
+											?>
+											<option value="<?php echo $objResult["pk"]; ?>"><?php echo $objResult["name"]; ?></option> 
+											<?php  
+											}
+											?>   
+											<?php 
+											$sql = "SELECT * FROM store where pk != '".$searchname4."' order by pk asc  "; 
+											$query = mysqli_query($objCon,$sql);
+											while($objResult = mysqli_fetch_array($query))
+											{ 
+											?>
+											<option value="<?php echo $objResult["pk"]; ?>"><?php echo $objResult["name"]; ?></option> 
+											<?php  
+											}
+											?>   
+											
+											<?php if(!empty($searchname2)){ ?>
+										  	<option value="">  ทั้งหมด    </option> 
+										    <?php } ?>
+											</select> 
+											<script type="text/javascript">
+											$(".myselect").select2();
+											</script>
+										  <span class="input-group-append" style=" display: none; ">
+										  <button class="btn btn-outline-secondary  " style="border: 0px solid; background-color: #store;" type="submit">
+												<img src="images/search.png" style="width: 15px; "> 
+										  </button>
+										</span>
+										</div> 
+
+										</td>    
+										<td width="1%">&nbsp;
+										
+										</td> 
+										<td width="30%"> 
+										<a href="checkcontactpartner.php?adminstatus=รอตรวจสอบ&searchname=<?php echo $searchname; ?>"> 
+										 <button type="button" class="btn btn-primary" style="background-color: #FF8C00; border-radius: 5px; width: 130px; height: 40px; border-color: #FF8C00; margin-top: 20px; "  data-toggle="modal" data-target="#smallmodal" > <font color="#FFF" size="2px" class="serif1" >    รอตรวจสอบ   </font> </button> 
+										</a> 
+										<a href="checkcontactpartner.php?adminstatus=อนุมัติ&searchname=<?php echo $searchname; ?>"> 
+										 <button type="button" class="btn btn-primary" style="background-color: #006400; border-radius: 5px; width: 130px; height: 40px; border-color: #006400; margin-top: 20px; "  data-toggle="modal" data-target="#smallmodal" > <font color="#FFF" size="2px" class="serif1" >    อนุมัติ   </font> </button> 
+										</a>  
+										<a href="checkcontactpartner.php?adminstatus=ยกเลิก&searchname=<?php echo $searchname; ?>"> 
+										 <button type="button" class="btn btn-primary" style="background-color: #FF0000; border-radius: 5px; width: 130px; height: 40px; border-color: #FF0000; margin-top: 20px; "  data-toggle="modal" data-target="#smallmodal" > <font color="#FFF" size="2px" class="serif1" >    ไม่อนุมัติ   </font> </button> 
+										</a> 
+										</td> 
+									</tr>
+								</table>  
+							 </div>
+						   
+						   
+						   
+						   
+						     <div   class="col-lg-12"  align="left"  > 
+							<table width="100%">
+								<tr> 
+									<td width="15%"> 
+									<font color="black" size="3px" class="serif">  วันที่    </font>
+
+									<div class="input-group   "  style="border: 1px solid #C9C9C9; border-radius: 4px; height: 40px; ">
+									<input class="form-control  current "   type="text" style="background-color: #FFF;  border: 1px solid #C9C9C9;  border: 0px; border-radius: 5px;   "    id="searchname" name="searchname" value="<?php echo $searchname; ?>"  readonly    autocomplete="off"  >
+
+									<span class="input-group-append" style="display: none; ">
+									  <button class="btn btn-outline-secondary  " style="border: 0px solid; background-color: #FFF;" type="submit">
+											<img src="images/search.png" style="width: 15px; "> 
+									  </button>
+									</span>
+									</div> 
+
+									</td>  
+									<td width="1%">&nbsp;   </td>  
+									<td width="15%"> 
+									<font color="black" size="3px" class="serif">  วันที่สิ้นสุด    </font>
+
+									<div class="input-group   "  style="border: 1px solid #C9C9C9; border-radius: 4px; height: 40px; ">
+									<input class="form-control  current "   type="text" style="background-color: #FFF;  border: 1px solid #C9C9C9;  border: 0px; border-radius: 5px;   "    id="searchname2" name="searchname2" value="<?php echo $searchname2; ?>"  readonly    autocomplete="off"  >
+
+									<span class="input-group-append">
+									  <button class="btn btn-outline-secondary  " style="border: 0px solid; background-color: #FFF;" type="submit">
+											<img src="images/search.png" style="width: 15px; "> 
+									  </button>
+									</span>
+									</div> 
+
+									</td>    
+									<td width="1%">&nbsp;     </td> 
+									<td width="30%">&nbsp;    </td> 
+								</tr>
+							</table>  
+							</div>
+							
+							
+							
+						   
+							</form> 
+                      		 
+                       		 <div class="col-lg-12"> &nbsp; </div>
+                           
+                           
+                           
+                           <div class="col-md-4" style="margin-top: 15px;" > 
+							  <style>
+								 .pagination {
+									list-style-type: none; 
+									display: inline-flex;
+									justify-content: space-between;
+									box-sizing: border-box;
+								}
+								.pagination li {
+									box-sizing: border-box;
+									padding-right: 10px;
+								}
+								.pagination li a {
+									box-sizing: border-box;
+									background-color: #e2e6e6;
+									padding: 8px;
+									text-decoration: none;
+									font-size: 12px;
+									font-weight: bold;
+									color: #616872;
+									border-radius: 4px;
+								}
+								.pagination li a:hover {
+									background-color: #d4dada;
+								}
+								.pagination .next a, .pagination .prev a {
+									text-transform: uppercase;
+									font-size: 12px;
+								}
+								.pagination .currentpage a {
+									background-color: #518acb;
+									color: #fff;
+								}
+								.pagination .currentpage a:hover {
+									background-color: #518acb;
+								}
+							</style> 
+												
+							<?php											
+								$perpage = 25;
+								if (isset($_GET['page2'])) {
+									$page = $_GET['page2']; 
+								 } else {
+									$page = 1;
+								} 
+
+								if (empty($_GET['page2'])) {
+									 $page = 1;
+								 }  			
+								$start = ($page - 1) * $perpage;
+
+
+								$addcode = "";
+								if(empty($_GET["searchname3"])){
+
+								}else{
+									$addcode = " and  ( codecustomer like '%".$searchname3."%' or data1 like '%".$searchname3."%' )";
+								}
+								$addcode2 = ""; 
+								if(empty($_GET["adminstatus"])){
+
+								}else{
+									$addcode2 = " and statusadmin = '".$adminstatus."'  ";
+								} 
+
+								$addcode3 = "";  
+								if(empty($_GET["searchname4"])){
+
+								}else{
+									$addcode3 = " and store = '".$searchname4."'  ";
+								} 
+
+										
+
+								$contactstart = date("Y-m-d", strtotime($daystart_load));  
+								$checkend = date("Y-m-d", strtotime($daystart_load2));			 
+													 
+								$addcode4 = "  and  create_date2 BETWEEN '".$contactstart."' AND '".$checkend."'  "; 
+													 
+													 
+													 
+								$totalcal1= 0;
+								$totalcal2= 0;
+								$totalcal3 = 0;
+								$totalcal4 = 0;
+								$endback= 0;
+								$total_record= 0;
+															  
+								$sql2 = " SELECT a.* FROM list_order_partner a 
+								Inner Join member_all b On a.create_by = b.pk
+								where a.bill_no != '' ".$addcode.$addcode2.$addcode3.$addcode4." order by a.pk asc   ";    
+								$query2 = mysqli_query($con,$sql2); 
+								while($objResult2 = mysqli_fetch_array($query2))
+								{        
+									$total_record++;
+								}							  
+															  
+															  
+								$total_page = ceil($total_record / $perpage);
+								 ?>  
+								<?php if (ceil($total_record / $perpage) > 0): ?>
+									 <ul class="pagination">
+									<?php if ($page > 1): ?>
+									<li class="prev"><a href="checkcontactpartner.php?page2=<?php echo $page-1 ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>">Prev</a></li>
+									<?php endif; ?>
+
+									<?php if ($page > 3): ?>
+									<li class="start"><a href="checkcontactpartner.php?page2=1&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>">1</a></li>
+									<li class="dots">...</li>
+									<?php endif; ?>
+
+									<?php if ($page-2 > 0): ?><li class="page"><a href="checkcontactpartner.php?page2=<?php echo $page-2 ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>"><?php echo $page-2 ?></a></li><?php endif; ?>
+									<?php if ($page-1 > 0): ?><li class="page"><a href="checkcontactpartner.php?page2=<?php echo $page-1 ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>"><?php echo $page-1 ?></a></li><?php endif; ?>
+
+									<li class="currentpage"><a href="checkcontactpartner.php?page2=<?php echo $page ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>"><?php echo $page ?></a></li>
+
+									<?php if ($page+1 < ceil($total_record / $perpage)+1): ?><li class="page"><a href="checkcontactpartner.php?page2=<?php echo $page+1 ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>"><?php echo $page+1 ?></a></li><?php endif; ?>
+									<?php if ($page+2 < ceil($total_record / $perpage)+1): ?><li class="page"><a href="checkcontactpartner.php?page2=<?php echo $page+2 ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>"><?php echo $page+2 ?></a></li><?php endif; ?>
+
+									<?php if ($page < ceil($total_record / $perpage)-2): ?>
+									<li class="dots">...</li>
+									<li class="end"><a href="checkcontactpartner.php?page2=<?php echo ceil($total_record / $perpage) ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>"><?php echo ceil($total_record / $perpage) ?></a></li>
+									<?php endif; ?>
+
+									<?php if ($page < ceil($total_record / $perpage)): ?>
+									<li class="next"><a href="checkcontactpartner.php?page2=<?php echo $page+1 ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&adminstatus=<?php echo $adminstatus; ?>&page=&searchname3=<?php echo $searchname3; ?>&searchname4=<?php echo $searchname4; ?>">Next</a></li>
+									<?php endif; ?>
+								</ul>
+								<?php endif; ?>
+
+							</div>
+                           
+                           
+                       		 <div class="col-lg-12"> &nbsp; </div>
+                            
+                           
+                            <div class="col-lg-12"  align="left" style="margin-top: 15px; "  >  
+							<div class="table-responsive"  >
+							<table id="key_product"  class=" table    tablemobile  " border="0" style="width: 4500px;"    >
+							    <thead> 
+								<tr>
+								<th  bgcolor="#BEC6CB" height="35px;" style="border: 0px solid #FFF; border-right: 1px solid #FFF;  border-top-left-radius: 10px;  "  ><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">    วันที่ทำสัญญา    </font></div></th>    
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF; "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">    สินค้าจาก  </font></div></th>    
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; "> รหัสลูกค้า   </font></div></th>    
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ชื่อ สกุล     </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ชื่อเฟส     </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ลิ้งค์ url     </font></div></th>  
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  เบอร์โทร   </font></div></th>  
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  สินค้ารุ่น   </font></div></th>  
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  สี    </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  อีมี่    </font></div></th>    
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  Apple ID    </font></div></th>    
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  Password    </font></div></th>      
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ราคาสินค้า   </font></div></th>     
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ดาวน์   </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ค่าCOD  </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  คงเหลือ  </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ผ่อนเดือนละ   </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  จำนวนเดือน   </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  วันที่เริ่มชำระ   </font></div></th>   
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  พิมพ์   </font></div></th>     
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ผู้ปฏิบัติงาน   </font></div></th>
+								 
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  เบอร์ผูกiCloud   </font></div></th> 
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ราคาขาย  </font></div></th>  
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  เงินดาวน์  </font></div></th>  
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ค่าสัญญา  </font></div></th>  
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  จำนวน%  </font></div></th>  
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ค่าคอม    </font></div></th> 
+								<th  bgcolor="#BEC6CB" style="border: 0px solid #FFF;  border-right: 1px solid #FFF;  "><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  ยอดจ่ายร้านค้า    </font></div></th> 
+								
+								   
+
+								<th width="3%" bgcolor="#BEC6CB" style="border: 0px solid #FFF;   border-top-right-radius: 10px;"><div align="center"> 
+								<font size="3px" class="serif2" color="#000" style=" font-size: 13px; ">  แก้ไข   </font></div></th>  
+							  </tr>
+							  </thead>   
+							<tbody> 
+							<?php 
+							$bg = "#F8FAFD"; 
+							$i = 1;
+							$total = 0;
+							$totalprice1 = 0;
+							$totalprice2 = 0;
+							$totalprice3 = 0;
+							$totalprice4 = 0; 
+
+							if (empty($_GET['page2'])) { 
+								$i = 1;
+							}else if (($_GET['page2'] == 1)) { 
+								$i = 1;
+							}else{
+
+								$i = ( ($_GET["page2"]-1) * 25 ) + 1; 
+							}
+
+							$sql2 = " SELECT a.*, b.store  FROM list_order_partner a 
+								Inner Join member_all b On a.create_by = b.pk
+								where a.bill_no != '' ".$addcode.$addcode2.$addcode3.$addcode4." order by a.pk asc  limit {$start} , {$perpage}   ";   
+													 
+							 
+							$query2 = mysqli_query($con,$sql2); 
+							while($objResult2 = mysqli_fetch_array($query2))
+							{      
+								
+								if($bg == "#FFF"){ 
+									$bg = "#F8FAFD"; 
+								}else{  
+									$bg = "#FFF"; 
+								}
+								$major = $objResult2["major"];  
+								$savedate = $objResult2["savedate"];  
+								$typedatasave = $objResult2["typedatasave"];  
+								$data1 = $objResult2["data1"];  
+								$data2 = $objResult2["data2"];  
+								$data3 = $objResult2["data3"];  
+								$data4 = $objResult2["data4"];  
+								$data5 = $objResult2["data5"];  
+								$data6 = $objResult2["data6"];  
+								$data7 = $objResult2["data7"];  
+								$typedataproduct = $objResult2["typedataproduct"];  
+								$typedataproduct2 = $objResult2["typedataproduct2"];  
+								$typestore = $objResult2["typestore"];  
+								$typecolor = $objResult2["typecolor"];  
+								$dataimei = $objResult2["dataimei"];  
+								$moneystartprice = $objResult2["moneystartprice"];  
+								$moneyprice = $objResult2["moneyprice"];  
+								$moneydown = $objResult2["moneydown"];  
+								$cod = $objResult2["cod"];  
+								$daypriceall3 = $objResult2["daypriceall3"];  
+								$daytotal = $objResult2["daytotal"];  
+								$daypriceshow1 = $objResult2["daypriceshow1"];  
+								$moneymonthshow = $objResult2["moneymonthshow"];  
+								$daypayment = $objResult2["daypayment"];  
+								$dataicloud = $objResult2["dataicloud"];  
+								$pasycal = $objResult2["pasycal"];  
+								$bill_no = $objResult2["bill_no"];  
+								$codecustomer = $objResult2["codecustomer"];  
+								$admin1 = $objResult2["admin1"];  
+								$admin2 = $objResult2["admin2"];  
+								$admin3 = $objResult2["admin3"];  
+								$admin4 = $objResult2["admin4"];  
+								$admin5 = $objResult2["admin5"];  
+								$admin6 = $objResult2["admin6"];  
+								$admin7 = $objResult2["admin7"];  
+								$create_by = $objResult2["create_by"];   
+								$startdate = $objResult2["startdate"];   
+								$enddate = $objResult2["enddate"];   
+
+								$name_create = "-"; 
+								$sql = "SELECT * FROM member_all where pk = '".$objResult2["create_by"]."'   order by pk asc  "; 
+								$query = mysqli_query($objCon,$sql);
+								while($objResult = mysqli_fetch_array($query))
+								{ 
+										$name_create =  $objResult["name"];
+								}
+								
+								$name_create2 = "-"; 
+								$sql = "SELECT * FROM member_all where pk = '".$objResult2["admin_apple"]."'   order by pk asc  "; 
+								$query = mysqli_query($objCon,$sql);
+								while($objResult = mysqli_fetch_array($query))
+								{ 
+										$name_create2 =  $objResult["name"];
+								}
+								
+								
+								$name_typedatasave = "-"; 
+								$sql = "SELECT * FROM drop_typedata where pk = '".$objResult2["typedatasave"]."'   order by pk asc  "; 
+								$query = mysqli_query($objCon,$sql);
+								while($objResult = mysqli_fetch_array($query))
+								{ 
+										$name_typedatasave =  $objResult["name"];
+								}
+								
+								$name_major = "-"; 
+								$sql = "SELECT * FROM major where pk = '".$objResult2["major"]."'   order by pk asc  "; 
+								$query = mysqli_query($objCon,$sql);
+								while($objResult = mysqli_fetch_array($query))
+								{ 
+										$name_major =  $objResult["name"];
+								}
+								
+								$name_typedatasave = "-"; 
+								$sql = "SELECT * FROM drop_typedata where pk = '".$objResult2["typedatasave"]."'   order by pk asc  "; 
+								$query = mysqli_query($objCon,$sql);
+								while($objResult = mysqli_fetch_array($query))
+								{ 
+										$name_typedatasave =  $objResult["name"];
+								}
+								
+								
+ 
+								$cut = explode("/",$objResult2["savedate"]);
+								$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+								$daystart = date("Y-m-d", strtotime($date_income));  
+			
+								
+								$cut = explode("/", $startdate);
+								$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+								$daystartshow = date("Y-m-d", strtotime($date_income));  
+			
+								
+									
+									$txtshow = "รอตรวจสอบ";
+									$hdd = " display: none; "; 
+									$bgbtn = " #FF8C00  ";
+									if($objResult2["statusadmin"] == "รอตรวจสอบ"){ 
+
+									}else if($objResult2["statusadmin"] == "อนุมัติ"){
+									$txtshow = "อนุมัติ";
+									$hdd = " display: block; "; 
+									$bgbtn = " #006400  ";
+									}else if($objResult2["statusadmin"] == "ยกเลิก"){
+									$txtshow = "ยกเลิก";
+									$hdd = " display: none; "; 
+									$bgbtn = " #FF0000  ";
+
+									}
+									
+								
+								$namepro1 = "";
+								$namepro2 = "";
+								$namepro_typedata = "";
+								if($objResult2["typedataproduct"] == "1"){
+									 
+									$sql_c = "SELECT * FROM drop_typepartner where pk = '".$objResult2["typedataproduct2"]."'   order by pk asc  "; 
+									$query_c = mysqli_query($objCon,$sql_c);
+									while($objResult_c = mysqli_fetch_array($query_c))
+									{ 
+										$namepro1 =  $objResult_c["name"];
+									}
+									
+								$namepro_typedata = " IOS ";
+									
+								}else if($objResult2["typedataproduct"] == "2"){
+									
+									$sql_c = "SELECT * FROM drop_typepartner where pk = '".$objResult2["typedataproduct2"]."'   order by pk asc  "; 
+									$query_c = mysqli_query($objCon,$sql_c);
+									while($objResult_c = mysqli_fetch_array($query_c))
+									{ 
+										$namepro1 =  $objResult_c["name"];
+									}
+									
+								$namepro_typedata = " Android  ";
+								}
+								
+								
+								$p_data3 = "";
+								$p_data4 = "";
+								$sql_c = "SELECT * FROM drop_typestore where pk = '".$objResult2["typestore"]."'   order by pk asc  "; 
+								$query_c = mysqli_query($objCon,$sql_c);
+								while($objResult_c = mysqli_fetch_array($query_c))
+								{ 
+									$p_data3 =  $objResult_c["name"];
+								}
+								$sql_c = "SELECT * FROM drop_typecolor where pk = '".$objResult2["typecolor"]."'   order by pk asc  "; 
+								$query_c = mysqli_query($objCon,$sql_c);
+								while($objResult_c = mysqli_fetch_array($query_c))
+								{ 
+									$p_data4 =  $objResult_c["name"];
+								}
+								
+								
+								$txtshow = "รอตรวจสอบ";
+								$hdd = " display: none; "; 
+								$bgbtn = " #FF8C00  ";
+								if($objResult2["statusadmin"] == "รอตรวจสอบ"){ 
+
+								}else if($objResult2["statusadmin"] == "อนุมัติ"){
+								$txtshow = "อนุมัติ";
+								$hdd = " display: block; "; 
+								$bgbtn = " #006400  ";
+								}else if($objResult2["statusadmin"] == "ยกเลิก"){
+								$txtshow = "ยกเลิก";
+								$hdd = " display: none; "; 
+								$bgbtn = " #FF0000  ";
+
+								}
+								
+								
+								
+								$name_store = "-"; 
+								$sql = "SELECT * FROM store where pk = '".$objResult2["store"]."'   order by pk asc  "; 
+								$query = mysqli_query($objCon,$sql);
+								while($objResult = mysqli_fetch_array($query))
+								{ 
+									$name_store =  $objResult["name"];
+								}
+                           ?>
+                           <tr style="background-color: <?php echo $bg ?>; "> 
+										 
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo DateThai($daystart)." ".DateThai2($daystart); ?> </font></div></td>
+							 
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo $name_store; ?> </font></div></td>
+                           
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo $objResult2["codecustomer"]; ?> </font></div></td>
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo $objResult2["data1"]; ?> </font></div></td>
+                            
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo $objResult2["data2"]; ?> </font></div></td>
+                           
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > 
+							
+							<?php if(!empty( $objResult2["data3"])){   ?>
+							
+							<a href="<?php echo $objResult2["data3"]; ?>" target="_blank">
+							<font size="3px" color="Black" style=" font-size: 13px; " > 
+							<?php echo $objResult2["data3"]; ?>
+							</font>
+							</a>
+							
+							<?php } ?>
+							  
+							
+							</font></div></td>
+							 
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo $objResult2["data4"]; ?> </font></div></td>
+							 
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >  <?php echo $namepro1; ?> </font></div></td>
+                             
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $p_data4; ?>   </font></div></td>
+							 
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $dataimei; ?>   </font></div></td>
+                            
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo $objResult2["data5"]; ?> </font></div></td>
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo $objResult2["data6"]; ?> </font></div></td>
+                             
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $moneyprice; ?>   </font></div></td>
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $moneydown; ?>   </font></div></td>
+                            
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $cod; ?>   </font></div></td>
+                            
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $daypriceall3; ?>   </font></div></td>
+                            
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $moneymonthshow; ?>   </font></div></td>
+                             
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $daytotal; ?>   </font></div></td>
+							
+							
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > <?php echo DateThai($daystartshow)." ".DateThai2($daystartshow); ?> </font></div></td>
+                            
+							
+                            
+                            <td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " > 
+								 
+								<div align="center" style = "<?php echo $hdd; ?>"   >
+								<font size="3px" color="Black" style=" font-size: 13px; " >  
+								<a class="btn  btn-sm" style=" background-color: #87CEEB; border-radius: 5px;  border-radius: 5px; cursor: pointer; margin-top: -5px;     " target="_blank" href="print_partner.php?bill_no=<?php echo $objResult2["bill_no"]; ?>"     >
+								<font color="#FFF" size="2px" class="serif2"  style=" font-size: 13px; "  > พิมพ์ </font>   </a> 
+								</font>
+								</div>
+                          
+                          	</font></div></td>
+                          	
+                           
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $name_create2; ?>   </font></div></td>
+                           
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $dataicloud; ?>   </font></div></td>
+							
+							
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $moneystartprice; ?>   </font></div></td>
+							
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $moneydown; ?>   </font></div></td>
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $admin1; ?>   </font></div></td>
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $admin2; ?>   </font></div></td>
+							
+							<?php
+								$priceallstart = ($moneyprice - $moneydown) ;
+								$priceall = ($moneyprice - $moneydown) - $moneydown  - $admin1;
+								$priceall2 = $priceall * ( $admin2 / 100);
+								
+								$sumall = $priceall + $priceall2;
+								
+								$sumallpercent = $priceall2 * ( 0.03 );
+								
+								/// echo $sumall;
+								///echo $admin3; 
+								
+								?>   
+							
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $priceall2; ?>   </font></div></td>
+							
+							
+							
+							
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >   <?php echo $sumall; ?>   </font></div></td>
+							
+							
+						 
+                           
+                           
+                           
+							<td style=" border-left: 0px solid #F2F2F2; "><div align="center"><font size="3px" color="Black" style=" font-size: 13px; " >  
+                         	<a href="checkcontactpartner_edit.php?bill_no=<?php echo $bill_no;?>"  class="  btn-sm " style="background-color: #FFF; border-radius: 5px;  border-color: #F77369; border: 1px solid  #F77369;   " ><font size="3px" color="red" style=" font-size: 13px; " > แก้ไข </font></a  
+                          
+                            </font></div></td>
+                           
+                            
+							</tr>
+                           <?php  $i++; } ?>
+                           </tbody>
+                           </table>
+                           </div> 
+                           </div> 
+                            
+                           
+                   	  <?php } ?>
+                   		    
+                   		  
+                  		  
+                          
+                  		  
+                          
+                          
+                  		 <div class="col-lg-12"  align="left" style="margin-top: 15px; "  >  
+                          <bR><bR><bR><br> <bR><bR><bR><br>  
+                          <bR><bR><bR><br> <bR><bR><bR><br> 
+                          <bR><bR><bR><br> <bR><bR><bR><br> 
+                          <bR><bR><bR><br> <bR><bR><bR><br> 
+                          <bR><bR><bR><br> <bR><bR><bR><br> 
+                          <bR><bR><bR><br> <bR><bR><bR><br> 
+                          <bR><bR><bR><br> <bR><bR><bR><br>  
+                          <bR><bR><bR><br> <bR><bR><bR><br>  
+                          <bR><bR>   
+						 </div>
+                     
+                    
+                </div>
+              </div>
+            </div>
+            
+             
+            
+        </div>
+
+<?php
+include('footer2.php');
+?>

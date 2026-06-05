@@ -1,0 +1,322 @@
+<?php
+session_start();  
+include('../database.php');
+	
+    $bg = "#F8FAFD";  
+	$member_main = $_SESSION["UserID"];  
+	$major = $_SESSION["Major"];  
+
+	$detail = "";
+	$notedata = "";
+	$customer = "";
+
+	$searchname = date('d/m')."/".(date('Y'));
+	if(empty($_GET["searchname"])){
+
+		$cut = explode("/",$searchname);
+		$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+		$daystart_load = date("d-m-Y", strtotime($date_income)); 
+	}else{
+		$searchname = $_GET["searchname"];
+
+
+
+		$cut = explode("/",$searchname);
+		$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+
+		$daystart_load = date("d-m-Y", strtotime($date_income)); 
+	}
+
+
+	$searchname2 = date('d/m')."/".(date('Y'));
+	if(empty($_GET["searchname2"])){
+
+		$cut = explode("/",$searchname2);
+		$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+		$daystart_load2 = date("d-m-Y", strtotime($date_income)); 
+	}else{
+		$searchname2 = $_GET["searchname2"];
+
+
+
+		$cut = explode("/",$searchname2);
+		$date_income = $cut[0]."-".$cut[1]."-".($cut[2]);  
+
+		$daystart_load2 = date("d-m-Y", strtotime($date_income)); 
+	}
+									
+	$searchname3 = "";
+	if(empty($_GET["searchname3"])){
+		
+	}else{
+		$searchname3 = $_GET["searchname3"];
+	}  
+
+
+									
+	$customername = "";
+	if(empty($_GET["customername"])){
+		
+	}else{
+		$customername = $_GET["customername"];
+	}  
+?>
+     
+     
+
+	<?php											
+		$perpage = 20;
+		if (isset($_GET['page2'])) {
+			$page = $_GET['page2']; 
+		 } else {
+			$page = 1;
+		} 
+
+		if (empty($_GET['page2'])) {
+			 $page = 1;
+		 }  			
+		$start = ($page - 1) * $perpage;
+
+
+
+		$addcode = "";
+		$addcode2 = ""; 
+		$addcode3 = ""; 
+		$addcode4 = ""; 
+		 
+		 
+		
+	$contactstart   = date("Y-m-d", strtotime($daystart_load)); 
+	$checkend   = date("Y-m-d", strtotime($daystart_load2)); 
+
+	$addcode = "  and  a.create_date2 BETWEEN '".$contactstart."' AND '".$checkend."'  "; 
+
+ 
+	if(empty($_GET["searchname3"])){
+
+	}else if(($_GET["searchname3"] == "กำลังผ่อน")){
+		$addcode2 = " and  a.closebill = 'เป็นหนี้' ";
+	}else if(($_GET["searchname3"] == "NPL")){
+		$addcode2 = " and  a.onoff = 'NPL' and  a.closebill = 'เป็นหนี้' ";
+	}else if(($_GET["searchname3"] == "หมดหนี้")){
+		$addcode2 = " and  a.closebill = 'หมดหนี้' ";
+		  
+	} 
+		
+		
+	if(!empty($_GET["customername"])){
+		$addcode4 = "   and b.name like '%".$customername."%'  or  a.codecustomer like '%".$customername."%' "; 
+	}
+		 
+
+	$totaldata1_no = 0;
+	$totaldata1 = 0;
+	$totaldata2 = 0;
+	$totaldata3 = 0; 
+	$sql2 = " SELECT a.*, b.name, c.codeno, b.facebook FROM list_order  a
+	Inner Join customer b On   a.customer = b.pk
+	Inner Join product c On   c.pk = a.menu_id
+	where a.bill_no != ''   and a.contactstatus = 'อนุมัติแล้ว' 
+	".$addcode.$addcode2.$addcode3.$addcode4."  
+	order by a.pk asc  "; 
+
+	$query2 = mysqli_query($con,$sql2); 
+	while($objResult2 = mysqli_fetch_array($query2))
+	{    
+			$money = $objResult2["money"]; 
+			$daytotal = $objResult2["daytotal"]; 
+			$dayprice = $objResult2["dayprice"];  
+			$c_status = $objResult2["c_status"];  
+			$g_create_date2 = $objResult2["create_date2"];  
+			$startdate = $objResult2["startdate"]; 
+			$endate = $objResult2["endate"];   
+
+ 
+			$allmoney = 0;
+			$discoount = 0;
+			$discoountpaymentother = 0;
+			
+			$check_round_payment = 0;
+			$check_round_dis = $daytotal;
+			
+			
+			$allpasy = 0;
+			$allpasy2 = 0;
+			
+			
+			$allpasy_new = 0;
+			$allpasy2_new = 0;
+			$allpasy3_new = 0;
+			
+			
+			$loadstart1 = date("Y-m-d", strtotime($startdate));  /// วันที่เริ่มเก็บ 
+			$loadstart2 = date("Y-m-d", strtotime(date('d-m-Y')));  /// วันที่เลือกล่าสุด 
+			$code_check2 = "  and create_date2 BETWEEN '".$loadstart1."' AND '".$loadstart2."'  "; 
+			
+			
+		    if($objResult2["closebill"] == "หมดหนี้"){
+			  $code_check2 = "";
+
+			}
+			
+			
+			$sql_c = "SELECT * FROM history_payment Where  
+			bill_no = '". $objResult2["bill_no"]."' 
+			and income != '' 
+			and income != '0'   
+			".$code_check2."  order by create_date2 asc "; 
+			
+			///  echo $sql_c."<br>";
+			$query_c = mysqli_query($objCon,$sql_c); 
+			while($objResult_c = mysqli_fetch_array($query_c))
+			{  
+				if(!empty($objResult_c["income"])){
+					
+					
+				$discountshow = 0;
+				$getdata2 = 0;
+				if(!empty($objResult_c["discount"])){
+					$discountshow = $objResult_c["discount"];
+				}
+				if(!empty($objResult_c["income"])){
+					$getdata2 =  $objResult_c["income"];	
+				} 
+				
+				$newcalculator = $getdata2 - $discountshow;
+			 	$vat = ($newcalculator * 100) / 107;
+					
+					
+					
+				$allpasy2 += $vat; 
+				$allpasy +=  $newcalculator - ($vat);
+				  
+				if(!empty($objResult_c["income"])){
+					$allpasy2_new +=  $objResult_c["income"];	
+				} 
+					 
+				if(!empty($objResult_c["discount"])){
+					$allpasy3_new += $objResult_c["discount"];
+				}
+					 
+					$discoount += $objResult_c["income"]; 
+					
+					if($check_round_payment == $objResult_c["orderdata"]){
+						
+					}else{
+						$check_round_payment = $objResult_c["orderdata"];
+						$check_round_dis++; 
+					}
+					 
+				}
+				 
+				if(!empty($objResult_c["paymentother"])){
+				$discoountpaymentother += $objResult_c["paymentother"]; 
+				}  
+				 
+				
+			}	
+
+										 
+ 
+			$txtshow = " เป็นหนี้ ";
+			$hdd = " "; 
+			$bgbtn = " #D7F1E4  ";
+			if($objResult2["closebill"] == "เป็นหนี้"){ 
+				
+			$txtshow = " กำลังผ่อน ";
+			$hdd = " "; 
+			$bgbtn = " #D7F1E4  ";
+				
+			if($objResult2["onoff"] == "NPL"){ 
+				
+			$txtshow = " กำลังผ่อน NPL ";
+			$hdd = " "; 
+			$bgbtn = " #D7F1E4  ";
+				
+			}
+
+			}else if($objResult2["closebill"] == "หมดหนี้"){
+			$txtshow = " หมดหนี้ ";
+			$hdd = " display: none;  "; 
+			$bgbtn = " #FFE0E0  ";
+
+			}
+			 
+			$allmoney = ($daytotal*$dayprice)-$discoount;
+			
+			//// echo   $dayprice  . " <Br> ";
+			//// echo  ($daytotal*$dayprice) . " <Br> ";
+			//// echo  $discoount . " <Br> ";
+			//// echo  $allmoney . " <Br> ";
+			
+			$vat3_new = (($allmoney) * 100 )  / 107;
+			$vat4_new = ($allmoney) - $vat3_new;
+			
+			//// echo  $vat3_new . " <Br> ";
+			//// echo  $vat4_new . " <Br> ";
+			 
+			
+			$disround = $daytotal - $check_round_payment;
+			
+			if($disround <= 0){
+				$disround = 0;
+			}
+			 
+			
+			$moneydata = $objResult2["moneydata"]; 
+			$moneydown = $objResult2["moneydown"];   
+			
+			$vat = (($moneydata-$moneydown) * 100  )  / 107;
+			$vat2 = ($moneydata-$moneydown) - $vat;
+			
+			
+			
+			$vat_new = (($money) * 100 )  / 107;
+			$vat2_new = ($money) - $vat_new;
+			
+			 
+			//// echo  $money . " <Br> ";
+			// echo $vat_new . " <Br> ";
+			// echo $vat2_new . " <Br> ";
+			
+			if($vat2 <= 0){
+				$vat2 = 0;
+			} 
+			
+		    if($objResult2["closebill"] == "หมดหนี้"){
+			 $vat2 = 0;
+			 $allmoney = 0;
+			 $disround = 0;
+
+			}
+
+		$total_record++;
+		
+		
+		$totaldata1 += (($money-$vat2_new) + $vat2_new);
+		$totaldata2 += ($allpasy2_new-$allpasy3_new);
+		$totaldata3 += ($vat4_new+$vat3_new);
+	}
+	 ?>  
+	  <button class="btn btn-sm  " style="  background-color: #006400; border-radius: 5px;  height: 40px;  border: 1px solid  #006400;  margin-top: 15px; " type="button"   >
+			<font color="#FFF" > จำนวน  <?php echo number_format(0+$total_record); ?>  คน </font>
+	  </button>
+	  <button class="btn btn-sm  " style="  background-color: #6495ED; border-radius: 5px;  height: 40px;  border: 1px solid  #6495ED;  margin-top: 15px; " type="button"   >
+			<font color="#FFF" > ยอดปล่อยสินเชื่อ  <?php echo number_format(0+$totaldata1); ?>  บาท </font>
+	  </button>
+	  <button class="btn btn-sm  " style="  background-color: #FF8C00; border-radius: 5px;  height: 40px;  border: 1px solid  #FF8C00;  margin-top: 15px; " type="button"   >
+			<font color="#FFF" > ค้างชำระ    <?php echo number_format(0+$totaldata3); ?>    บาท </font>
+	  </button>
+	  <button class="btn btn-sm  " style="  background-color: #006400; border-radius: 5px;  height: 40px;  border: 1px solid  #006400;  margin-top: 15px; " type="button"   >
+			<font color="#FFF" > ชำระแล้ว  <?php echo number_format(0+$totaldata2); ?>   บาท </font>
+	  </button>
+
+  	 <a href="printreportnew3.php?page2=<?php echo $page-1 ?>&searchname=<?php echo $searchname; ?>&searchname2=<?php echo $searchname2; ?>&searchname3=<?php echo $searchname3; ?>&customername=<?php echo $customername; ?>" target="_blank">
+  		 
+	  <button class="btn btn-sm  " style="  background-color: #8B0000; border-radius: 5px;   height: 40px;  border: 1px solid  #8B0000;  margin-top: 15px;  " type="button"    >
+			<font color="#FFF" >  พิมพ์เอกสาร </font>
+	  </button> 		
+  	 </a>
+         
+
+  
