@@ -7,6 +7,32 @@ $userPassword = getenv('DB_PASS') ?: "F5HqyW0iTSbx6DjU";
 $dbName = getenv('DB_NAME') ?: "silminmo_sg"; 
 $port = getenv('DB_PORT') ?: 3306;
 
+// Auto-parse full URI or host:port strings from DB_HOST environment variable
+if (getenv('DB_HOST')) {
+    $db_url = getenv('DB_HOST');
+    if (strpos($db_url, '://') !== false || strpos($db_url, ':') !== false) {
+        if (strpos($db_url, '://') === false) {
+            $db_url = 'mysql://' . $db_url;
+        }
+        $parsed = parse_url($db_url);
+        if (isset($parsed['host'])) {
+            $serverName = $parsed['host'];
+        }
+        if (isset($parsed['port'])) {
+            $port = (int)$parsed['port'];
+        }
+        if (isset($parsed['user'])) {
+            $userName = $parsed['user'];
+        }
+        if (isset($parsed['pass'])) {
+            $userPassword = $parsed['pass'];
+        }
+        if (isset($parsed['path'])) {
+            $dbName = ltrim($parsed['path'], '/');
+        }
+    }
+}
+
 $objCon = mysqli_connect($serverName, $userName, $userPassword, $dbName, $port);
 if (!$objCon) {
     die("Database Connection failed (objCon): " . mysqli_connect_error());
