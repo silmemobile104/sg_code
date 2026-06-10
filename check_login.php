@@ -8,6 +8,9 @@ include("database.php");
 
 			///echo $strSQL;
 			$objQuery = mysqli_query($objCon,$strSQL);
+			if (!$objQuery) {
+				die("Database Query failed: " . mysqli_error($objCon) . "<br>Query: " . htmlspecialchars($strSQL));
+			}
 			$objResult = mysqli_fetch_array($objQuery,MYSQLI_ASSOC); 
 			if(!$objResult)
 			{  

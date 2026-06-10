@@ -7,6 +7,9 @@ include("database.php");
 			$strSQL = "SELECT * FROM member_all WHERE username = '".$_POST['username']."' 
 			and password = '".$_POST['password']."' ";
 			$objQuery = mysqli_query($objCon,$strSQL);
+			if (!$objQuery) {
+				die("Database Query failed: " . mysqli_error($objCon) . "<br>Query: " . htmlspecialchars($strSQL));
+			}
 			$objResult = mysqli_fetch_array($objQuery,MYSQLI_ASSOC); 
 			if(!$objResult)
 			{  

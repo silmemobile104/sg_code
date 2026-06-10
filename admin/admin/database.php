@@ -8,8 +8,17 @@ $dbName = getenv('DB_NAME') ?: "silminmo_sg";
 $port = getenv('DB_PORT') ?: 3306;
 
 $objCon = mysqli_connect($serverName, $userName, $userPassword, $dbName, $port);
+if (!$objCon) {
+    die("Database Connection failed (objCon): " . mysqli_connect_error());
+}
 $con = mysqli_connect($serverName, $userName, $userPassword, $dbName, $port);
+if (!$con) {
+    die("Database Connection failed (con): " . mysqli_connect_error());
+}
 $conn = mysqli_connect($serverName, $userName, $userPassword, $dbName, $port);
+if (!$conn) {
+    die("Database Connection failed (conn): " . mysqli_connect_error());
+}
 
 mysqli_set_charset($objCon, "utf8");
 mysqli_set_charset($con, "utf8");
